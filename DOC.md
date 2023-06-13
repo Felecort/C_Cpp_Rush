@@ -337,5 +337,14 @@ decrement works similary
 `a + b + c` equal to `((a + b) + c)` - right associativity  
 `a = b = c` equal to `(a = (b = c))` - left associativity  
 
+# Dynamic memory allocation  
+`void *p = malloc(size)` - memory allocation  
+`void *p = aligned_alloc(alingnment, size)` - alingment memory allocation  
+`void *p = calloc(nmemb, size)` - allocate nmemb * size bytes  
+`void *p = realloc(*ptr, size)` - reallocate memory  
+If eny of this functions return NULL, it's an allocation error.  
+`void free(*ptr)` - free allocated memory. 
 
+## Good practise is set ptr to NULL after `free`:  
+`free(*ptr); ptr = NULL;`  
 
