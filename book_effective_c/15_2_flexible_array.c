@@ -26,6 +26,5 @@ int main(void)
     for (int i = 0; i < 12; i++)
         printf("%d ", arr->data[i]);
     
-    
     return EXIT_SUCCESS;
 }
