@@ -106,6 +106,18 @@ C have not arrays, but have pointers for arrays. :)
 `int (*p)[N]` - data type for `arr[M][N]`. NOT `int *q[4]`!  
 for `int z[10][15][20];` dtype is `int (*zptr)[15][20];`
 
+## Multidimentional arrays with no fixed size  
+Passing array with no constant size  
+```C
+int matrix_sum(size_t rows, size_t cols, int m[rows][cols]){
+    int total = 0;
+    for(size_t r = 0; r < rows; r++)
+        for (size_t c = 0; c < cols; c++)
+            total += m[r][c];
+    return total;
+}
+```
+
 # Static variables  
 Static variables exist while program run, and save it's state between func calls. Static means the addres of variable doesn't change.  
 Static doesn't use space in stack-frame, it's allocate in .bss  
@@ -131,6 +143,15 @@ The most frequent location for the string in .asm is .text section in unmutable 
 `sizeof(str)` -> 12 size of array (length)
 `char *ptr = "hello world` - in the immutable memory  
 `sizeof(ptr)` -> 4. Size of pointer (char)  
+
+`char` - type represents *narrow character* in 8 bits  
+`wchar_t` - represent *wide character*. more than 8 bits (16)  
+
+`None` - int
+`L'a'` - `w_char_t`  
+`u'a'` - `char16_t`  
+`U'a'` - `char32_t`  
+
 
 # Command line args  
 `int argc` - 1st arg is number of args  
@@ -348,3 +369,11 @@ If eny of this functions return NULL, it's an allocation error.
 ## Good practise is set ptr to NULL after `free`:  
 `free(*ptr); ptr = NULL;`  
 
+
+# Entry point  
+`main` - is a basic entry point, that takes *narrwo* character args - receives ANSI  
+`wmain` - is the same, but with *wide* character args - receives UTF-16  
+
+
+# Enum  
+Enum defines in compile tome and can be used in `switch-case` operator. ordinary spell with lowercase.  
