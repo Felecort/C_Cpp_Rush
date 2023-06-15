@@ -48,7 +48,9 @@
         "iterator": "c",
         "stdarg.h": "c",
         "stddef.h": "c",
-        "assert.h": "c"
+        "assert.h": "c",
+        "stdatomic.h": "c",
+        "pthread.h": "c"
     },
     "cmake.configureOnOpen": false,
     "C_Cpp.dimInactiveRegions": false
