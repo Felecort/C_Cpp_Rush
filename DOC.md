@@ -172,8 +172,17 @@ But Sequence point can tuny define the concequencec
 
 # Files  
 `FILE*` - data type for working with files (pointer)  
+Never copy `FILE` object
 `fopen(<path>, <mode>)` - open file  
+`fclose(FILE stream)` - close file  
 `gets` - NEVER USE THIS CURSED FUNCTION  
+Try to use `fputc` - it's more safer
+`stdio.h` already include `stdout`, `stderr`, `stdin` and other functions that handle files with char or wchar_t  
+
+To get position indicator use `ftell` or `fseek`. If index is large: `fgetpos` and `fsetpos`  
+
+
+![alt text for screen readers](/.images/file_handler-funcs.jpg "Functions")  
 
 # Structures  
 
