@@ -57,6 +57,12 @@ Char size by default is equal 1
 
 `typeof` equal `unsigned long int`  
 
+## _Atomic  
+`_Atomic <var>` structur for many threads. Only one thread can access to atomic data  
+
+## Generic  
+One of abiluty to func overload  
+
  
 ## Wraparound  
 Equal to overflow some dtype  
