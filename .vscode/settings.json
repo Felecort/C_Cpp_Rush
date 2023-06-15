@@ -50,7 +50,15 @@
         "stddef.h": "c",
         "assert.h": "c",
         "stdatomic.h": "c",
-        "pthread.h": "c"
+        "pthread.h": "c",
+        "cctype": "cpp",
+        "clocale": "cpp",
+        "cstdarg": "cpp",
+        "cstdint": "cpp",
+        "cwctype": "cpp",
+        "iosfwd": "cpp",
+        "iostream": "cpp",
+        "cinttypes": "cpp"
     },
     "cmake.configureOnOpen": false,
     "C_Cpp.dimInactiveRegions": false
