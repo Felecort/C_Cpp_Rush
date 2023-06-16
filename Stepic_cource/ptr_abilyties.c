@@ -14,9 +14,12 @@ lld complex_function(lld a, lld b, lld c, lld d, lld e, lld f, lld g){
 int main(void)
 {
     char simple_var;
-    printf("char ptr: %p, sizeof: %d \n", &simple_var, sizeof(simple_var));
+    char *simple_ptr;
+    simple_ptr = &simple_var;
+    printf("char ptr: %p, size: %d \n", &simple_var, sizeof(simple_var));
     printf("simple ptr: %p, size: %d \n", simple_function, sizeof(simple_function));
     printf("complex ptr: %p, size: %d \n", complex_function, sizeof(complex_function));
 
+    printf("lld: %d", sizeof(lld));
     return 0;
 }
