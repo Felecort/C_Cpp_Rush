@@ -20,6 +20,9 @@ int main(void)
     printf("simple ptr: %p, size: %d \n", simple_function, sizeof(simple_function));
     printf("complex ptr: %p, size: %d \n", complex_function, sizeof(complex_function));
 
-    printf("lld: %d", sizeof(lld));
+    printf("lld: %d \n", sizeof(lld));
+    char *test_ptr;
+    printf("non init ptr: %p", test_ptr);
+
     return 0;
 }
