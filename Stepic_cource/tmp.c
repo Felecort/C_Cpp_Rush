@@ -20,7 +20,7 @@ int* topKFrequent(int* nums, int num_elements, int k, int* returnSize){
     node *struct_array = malloc(num_elements * node_size);
 
     struct_array[0].value = nums[0];
-    struct_array[0].counter++;
+    struct_array[0].counter = 1;
     filled_nodes++;
     printf("Start filling \n");
     for (int i = 1; i < num_elements; i++){
@@ -30,9 +30,12 @@ int* topKFrequent(int* nums, int num_elements, int k, int* returnSize){
                 struct_array[node_idx].counter++;
                 break;
             }
-            struct_array[node_idx].value = element;
-            struct_array[node_idx].counter = 1;
-            filled_nodes++;
+            if ((filled_nodes - 1) == node_idx){
+                struct_array[filled_nodes].value = element;
+                struct_array[filled_nodes].counter = 1;
+                filled_nodes++;
+                break;
+            }
         }
     }
     printf("Stop filling \n");
@@ -44,8 +47,9 @@ int* topKFrequent(int* nums, int num_elements, int k, int* returnSize){
 
 int main(void)
 {
-    int arr[] = {1, 1, 1, 2, 2, 3};
-    int num_elements = 6;
+    int arr[] = {1, 1, 2, 3, 3, 4, 1, 12, 3, 4, 5, 4, 1, 2, 5};
+    int num_elements = sizeof(arr) / sizeof(arr[0]);
+    printf("size arr: %d \n", num_elements);
     int k = 2;
     int *returnSize;
     int *out = topKFrequent(arr, num_elements, k, returnSize);
