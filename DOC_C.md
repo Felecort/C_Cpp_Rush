@@ -192,6 +192,8 @@ To get position indicator use `ftell` or `fseek`. If index is large: `fgetpos` a
 
 # Structures  
 
+Struct defenition is a type defenition, not a creation object/ Like a new datatype
+
 `struct <name> {<fields>} [vars];` - basic syntax  
 Size of structer more than sum of var sizes, because compiler use alingment bites. Processor demand placing some data in cells div by 2 or 4  
 `struct student *ptr` - pointer for struct  
