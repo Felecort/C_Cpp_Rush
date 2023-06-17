@@ -6,7 +6,7 @@ struct point_coords{
     char x;
     int y;
     int z;
-} ;
+};
 
 int main(void)
 {   
