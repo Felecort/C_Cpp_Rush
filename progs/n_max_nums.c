@@ -1,11 +1,5 @@
-/**
- * Note: The returned array must be malloced, assume caller calls free().
- */
-
-#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-
 
 #define DEBUG
 
@@ -75,6 +69,7 @@ int* topKFrequent(int* nums, int num_elements, int k, int* return_size){
         max_values[0] = struct_array[0].value;
         *return_size = k;
         free(struct_array);
+        struct_array = NULL;
         return max_values;
     }
 
@@ -93,6 +88,7 @@ int* topKFrequent(int* nums, int num_elements, int k, int* return_size){
     }
     *return_size = k;
     free(struct_array);
+    struct_array = NULL;
     return max_values;
 }
 
@@ -105,7 +101,6 @@ int main(void)
     int return_size = 0;
     int *out = topKFrequent(arr, num_elements, k, &return_size);
 
-    printf("Size: %d \n", return_size);
     for(int i = 0; i < return_size; i++){
         printf("%d ", out[i]);
     }
