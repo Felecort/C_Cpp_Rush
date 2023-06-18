@@ -14,17 +14,43 @@ typedef struct node{
     int value;
 } node;
 
-int compare(struct node *arg1, struct node *arg2){
+
+int compare(const struct node *arg1, const struct node *arg2)
+{
     if (arg1->counter > arg2->counter){
         return 0;
     }
     return 1;
 }
 
+
+void fill_structures(node *struct_array, const int *nums, int *filled_nodes, const int num_elements)
+{
+    int element;
+    struct_array[0].value = nums[0];
+    struct_array[0].counter = 1;
+    (*filled_nodes)++;
+    for (int i = 1; i < num_elements; i++){
+        element = nums[i];
+        for (int node_idx = 0; node_idx < *filled_nodes; node_idx++){
+            if (struct_array[node_idx].value == element){
+                struct_array[node_idx].counter++;
+                break;
+            }
+            if ((*filled_nodes - 1) == node_idx){
+                struct_array[*filled_nodes].value = element;
+                struct_array[*filled_nodes].counter = 1;
+                (*filled_nodes)++;
+                break;
+            }
+        }
+    }
+}
+
+
 int* topKFrequent(int* nums, int num_elements, int k, int* return_size){
     size_t node_size = sizeof(node);
     int filled_nodes = 0;
-    int element;
 
     if (num_elements == 1){
         int *max_values = malloc(sizeof(int));
@@ -35,24 +61,8 @@ int* topKFrequent(int* nums, int num_elements, int k, int* return_size){
 
     node *struct_array = (node *)malloc(num_elements * node_size);
 
-    struct_array[0].value = nums[0];
-    struct_array[0].counter = 1;
-    filled_nodes++;
-    for (int i = 1; i < num_elements; i++){
-        element = nums[i];
-        for (int node_idx = 0; node_idx < filled_nodes; node_idx++){
-            if (struct_array[node_idx].value == element){
-                struct_array[node_idx].counter++;
-                break;
-            }
-            if ((filled_nodes - 1) == node_idx){
-                struct_array[filled_nodes].value = element;
-                struct_array[filled_nodes].counter = 1;
-                filled_nodes++;
-                break;
-            }
-        }
-    }
+    fill_structures(struct_array, nums, &filled_nodes, num_elements);
+
 #ifdef DEBUG
     for (int i = 0; i < filled_nodes; i++){
         printf("Value: %d Counter: %d \n", struct_array[i].value, struct_array[i].counter);
@@ -75,14 +85,15 @@ int* topKFrequent(int* nums, int num_elements, int k, int* return_size){
     }
     puts("---------------------------------");
 #endif
+
     int *max_values = malloc(k * sizeof(int)); 
     for(int i = 0; i < k; i++){
         max_values[i] = struct_array[i].value;
     }
     *return_size = k;
     return max_values;
-
 }
+
 
 int main(void)
 {
