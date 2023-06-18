@@ -57,6 +57,13 @@ int* topKFrequent(int* nums, int num_elements, int k, int* return_size){
     // if (k >= filled_nodes){
     //     return //
     // }
+    if (filled_nodes == 1){
+        int *max_values = malloc(sizeof(int)); 
+        max_values[0] = struct_array[0].value;
+        *return_size = k;
+        return max_values;
+    }
+
     short sorted = 0;
     node tmp_node;
     while(!sorted){
