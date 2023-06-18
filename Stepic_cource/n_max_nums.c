@@ -7,7 +7,7 @@
 #include <stdlib.h>
 
 
-// #define DEBUG
+#define DEBUG
 
 typedef struct node{
     int counter;
@@ -75,18 +75,19 @@ int* topKFrequent(int* nums, int num_elements, int k, int* return_size){
                 struct_array[i] = struct_array[i + 1];
                 struct_array[i + 1] = tmp_node;
                 replacements++;
-
             }
-        if (replacements == 0) sorted = 1;
+
         }
+        if (replacements == 0) sorted = 1;
+        
     }
+
 #ifdef DEBUG
     for (int i = 0; i < filled_nodes; i++){
         printf("Value: %d Counter: %d \n", struct_array[i].value, struct_array[i].counter);
     }
     puts("---------------------------------");
 #endif
-
     int *max_values = malloc(k * sizeof(int)); 
     for(int i = 0; i < k; i++){
         max_values[i] = struct_array[i].value;
@@ -98,7 +99,7 @@ int* topKFrequent(int* nums, int num_elements, int k, int* return_size){
 
 int main(void)
 {
-    int arr[] = {1, 1};
+    int arr[] = {4, 1, -1, 2, -1, 2, 3};
     int num_elements = sizeof(arr) / sizeof(arr[0]);
     int k = 2;
     int return_size = 0;
