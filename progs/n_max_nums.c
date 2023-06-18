@@ -15,9 +15,9 @@ typedef struct node{
 } node;
 
 
-int compare(const struct node *arg1, const struct node *arg2)
+int compare(const void * arg1, const void *arg2)
 {
-    if (arg1->counter > arg2->counter){
+    if (((const node *)arg1)->counter > ((const node *)arg2)->counter){
         return 0;
     }
     return 1;
@@ -53,7 +53,7 @@ int* topKFrequent(int* nums, int num_elements, int k, int* return_size){
     int filled_nodes = 0;
 
     if (num_elements == 1){
-        int *max_values = malloc(sizeof(int));
+        int *max_values = (int *)malloc(sizeof(int));
         max_values[0] = nums[0];
         *return_size = 1;
         return max_values;
@@ -74,6 +74,7 @@ int* topKFrequent(int* nums, int num_elements, int k, int* return_size){
         int *max_values = malloc(sizeof(int)); 
         max_values[0] = struct_array[0].value;
         *return_size = k;
+        free(struct_array);
         return max_values;
     }
 
@@ -91,6 +92,7 @@ int* topKFrequent(int* nums, int num_elements, int k, int* return_size){
         max_values[i] = struct_array[i].value;
     }
     *return_size = k;
+    free(struct_array);
     return max_values;
 }
 
