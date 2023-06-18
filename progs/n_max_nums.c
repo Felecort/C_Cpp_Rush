@@ -10,11 +10,16 @@
 #define DEBUG
 
 typedef struct node{
-    int counter;
+    char counter;
     int value;
 } node;
 
-
+int compare(struct node *arg1, struct node *arg2){
+    if (arg1->counter > arg2->counter){
+        return 0;
+    }
+    return 1;
+}
 
 int* topKFrequent(int* nums, int num_elements, int k, int* return_size){
     size_t node_size = sizeof(node);
@@ -62,23 +67,7 @@ int* topKFrequent(int* nums, int num_elements, int k, int* return_size){
         return max_values;
     }
 
-    short sorted = 0;
-    node tmp_node;
-    while(!sorted){
-        int replacements = 0;
-        for (int i = 0; i < (filled_nodes - 1); i++){
-            
-            if (struct_array[i].counter < struct_array[i + 1].counter){
-                tmp_node = struct_array[i];
-                struct_array[i] = struct_array[i + 1];
-                struct_array[i + 1] = tmp_node;
-                replacements++;
-            }
-
-        }
-        if (replacements == 0) sorted = 1;
-        
-    }
+    qsort(struct_array, filled_nodes, node_size, compare);
 
 #ifdef DEBUG
     for (int i = 0; i < filled_nodes; i++){
