@@ -43,16 +43,29 @@ int* topKFrequent(int* nums, int num_elements, int k, int* returnSize){
     for (int i = 0; i < filled_nodes; i++){
         printf("Value: %d Counter: %d \n", struct_array[i].value, struct_array[i].counter);
     }
+    puts("---------------------------------");
 
-    int max_arr[k];
-    int elem_counter = 0;
-    for (int i = 0; i < k; i++) max_arr[i] = 0;
-
-    for (int idx = 0; idx < filled_nodes; idx++){
-        elem_counter = struct_array[idx].counter;
-        for (int j = 0; j < k; j++){
+    // if (k >= filled_nodes){
+    //     return //
+    // }
+    short sorted = 0;
+    node tmp_node;
+    while(!sorted){
+        int replacements = 0;
+        for (int i = 0; i < (filled_nodes - 1); i++){
             
+            if (struct_array[i].counter > struct_array[i + 1].counter){
+                tmp_node = struct_array[i];
+                struct_array[i] = struct_array[i + 1];
+                struct_array[i + 1] = tmp_node;
+                replacements++;
+
+            }
+        if (replacements == 0) break;
         }
+    }
+    for (int i = 0; i < filled_nodes; i++){
+        printf("Value: %d Counter: %d \n", struct_array[i].value, struct_array[i].counter);
     }
 }
 
