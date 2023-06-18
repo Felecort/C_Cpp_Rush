@@ -54,14 +54,14 @@ int* topKFrequent(int* nums, int num_elements, int k, int* returnSize){
         int replacements = 0;
         for (int i = 0; i < (filled_nodes - 1); i++){
             
-            if (struct_array[i].counter > struct_array[i + 1].counter){
+            if (struct_array[i].counter < struct_array[i + 1].counter){
                 tmp_node = struct_array[i];
                 struct_array[i] = struct_array[i + 1];
                 struct_array[i + 1] = tmp_node;
                 replacements++;
 
             }
-        if (replacements == 0) break;
+        if (replacements == 0) sorted = 1;
         }
     }
     for (int i = 0; i < filled_nodes; i++){
@@ -71,7 +71,7 @@ int* topKFrequent(int* nums, int num_elements, int k, int* returnSize){
 
 int main(void)
 {
-    int arr[] = {1, 1, 2, 3, 3, 4, 1, 12, 3, 4, 5, 4, 1, 2, 5};
+    int arr[] = {1, 1, 3, 2, 2, 4, 4, 1, 1, 2, 3, 4, 5, 6};
     int num_elements = sizeof(arr) / sizeof(arr[0]);
     int k = 2;
     int *returnSize;
