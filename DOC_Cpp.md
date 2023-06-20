@@ -9,3 +9,8 @@
 `delete [] m`  
 
 Существует мнемоническое правило, позволяющее легко запомнить, к чему относится const. Надо провести черту через "*", если const слева, то оно относится к значению данных; если справа — к значению указателя.
+
+
+
+# Multidimentions type cast  
+![alt text for screen readers](/.images/array_types_cast.png "Functions")  
