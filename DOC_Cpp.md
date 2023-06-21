@@ -19,3 +19,6 @@
 # Strings  
 Don't use C-strings, it's hard and tedious  
 Use `<string>` lib  
+
+# Structures  
+Can contains functions/classes...  
