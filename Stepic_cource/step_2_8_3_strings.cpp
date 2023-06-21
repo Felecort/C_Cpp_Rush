@@ -17,8 +17,7 @@ int main(void)
     if (s1 == s2){
         cout << "s1 == s2" << endl;
     }
-    
-    
+
     return 0;
 }
 
