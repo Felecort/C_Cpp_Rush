@@ -14,3 +14,8 @@
 
 # Multidimentions type cast  
 ![alt text for screen readers](/.images/array_types_cast.png "Functions")  
+
+
+# Strings  
+Don't use C-strings, it's hard and tedious  
+Use `<string>` lib  
