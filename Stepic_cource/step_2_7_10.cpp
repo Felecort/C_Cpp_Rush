@@ -5,8 +5,8 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-#define COLS 3
-#define ROWS 5
+#define COLS 30
+#define ROWS 50
 
 
 int **create_2d_arr(unsigned rows, unsigned cols)
