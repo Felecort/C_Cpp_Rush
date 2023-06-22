@@ -203,7 +203,7 @@ struct Point{
     }
 
     Point &operator=(Point &p){ // Overload = operator
-        if (this != p){ // Except a = a case
+        if (this != &p){ // Except p = p case
             ...
         }
         return *this;
