@@ -8,6 +8,7 @@
 `int *m = new [N]`  
 `delete [] m`  
 
+`new (this) Class(other.field)` - copy
 Operator `new` call constructor. `malloc` doesn't do it
 
 # Constants  
@@ -295,4 +296,25 @@ int main(){
     delete p; // ~Student 
 }
 
+```  
+
+# Pure virtual methods realization  
+
+```cpp
+struct NetworkDevice {
+    virtual void send(void *data, size_t size) = 0;
+    ...
+};
+
+void NetworkDevice::send(void *data, size_z size){
+    ...
+}
+
+struct Router : NetworkDevice {
+    void send(void *data, size_t size){
+        ...
+        // nonvirtual method
+        NetworkDevice::send(data, size);
+    }
+}
 ```
