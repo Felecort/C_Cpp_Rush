@@ -31,6 +31,30 @@ Don't use C-strings, it's hard and tedious
 Structs exist only in cimpile time, not after
 Use `<string>` lib  
 
+# Scope enums  
+Scoped enums more safety, they required `::` operator  
+```cpp
+enum class Motion {
+    Forward,
+    Back,
+    Left,
+    Right,
+};
+
+int main(void)
+{
+    Motion m = Motion::Back; 
+    return 0;
+}
+```
+
+# Range-based loops  
+`for(element_type element_name : array)`  
+```cpp
+int arr[] = {10, 20, 30};
+for (int i : arr){}
+
+```
 # Classes and Structures  
 Classes = Structures, but in classes all fields are private
 Struct with methods is a class. No ability to use standart struct initialization  
