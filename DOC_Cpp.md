@@ -133,4 +133,8 @@ void foo()
     IntArray a1(10);
     IntArray a2(20);
 } // Delete struct. a2, then a1
-```
+```  
+
+
+# OOP  
+## Inheritance
