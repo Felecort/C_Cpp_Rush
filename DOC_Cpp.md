@@ -177,7 +177,10 @@ void foo()
 `struct Derived <public/private/protected> : Base`: public by defauld  
 `class Derived <public/private/protected> : Base`: private by defauld  
 Child class haven't access for private fields in parent class.  
-Keyword `protected` get access for private fields and methods for his children. But better not to use this modifyer for fields, only for methods    
+Keyword `protected` get access for private fields and methods for his children. But better not to use this modifyer for fields, only for methods   
+`struct A : <public/private/protected> B`  
+
+
 ```cpp
 
 struct Person {
@@ -342,3 +345,11 @@ struct Router : NetworkDevice {
     }
 }
 ```
+
+# Aggregation and Inheritence  
+
+для агрегирования и наследования есть правило:
+
+"если a имеет b " -  пишем агрегацию
+
+"если a является b" - наследование
