@@ -1,3 +1,10 @@
+#include <iostream>
+
+using std::cout;
+using std::cin;
+using std::endl;
+
+
 struct Expression
 {
     virtual double evaluate() const = 0;
@@ -10,7 +17,7 @@ struct Number : Expression
         : value(value)
     {}
     
-    double evaluate() {return value;}
+    double evaluate() const {return value;}
 
 private:
     double value;
@@ -29,23 +36,24 @@ struct BinaryOperation : Expression
     BinaryOperation(Expression const * left, char op, Expression const * right)
         : left(left), op(op), right(right)
     {}
-     double evaluate(){
+     double evaluate() const {
         switch (op) {
             case '+':
-                return new Number(left->evaluate() + left->evaluate());
+                return  (left->evaluate() + right->evaluate());
             case '-': 
-                return new Number(left->evaluate() - left->evaluate());
+                return  (left->evaluate() - right->evaluate());
             case '*': 
-                return new Number(left->evaluate() * left->evaluate());
+                return  (left->evaluate() * right->evaluate());
             case '/': 
-                return new Number(left->evaluate() / left->evaluate());
+                return  (left->evaluate() / right->evaluate());
+            default: return 0.0;
         }
     
      }
 private:
     Expression const * left;
-    Expression const * right;
     char op;
+    Expression const * right;
 };
 
 
