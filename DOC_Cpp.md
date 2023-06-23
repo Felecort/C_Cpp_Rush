@@ -171,4 +171,102 @@ private:
     string uni_;
 };
 
+```  
+
+
+## Overload  
+```cpp
+struct File {
+    void write(char const *s);
+    ...
+};
+
+struct FormattedFile : File {
+    void write(int i);
+    void write(double d);
+    using File::write; // Overload for write(const char*s)
+    ...
+};
+
+FormattedFile f;
+f.write(4;)
+f.write("Hello");
+```  
+## polymorfizm  
+## Overriding. Virtual methods
+
+```cpp
+struct Person_1 {
+    string name() const {return name_;}
+    ...
+};
+
+struct Person_2 {
+    virtual string name() const {return name_;}
+    ...
+};
+
+struct Professor : Person {
+    string name() const {
+        return "Prof. " + Person::name(); // Explisit call method `name`
+    }
+};
+
+Professor pr("Stroustrup");
+Person_1 *p = &pr;
+// Choose in compiletime
+p->name() // Strousturp. Not Prof.
+
+// Choose in runtime
+Person_2 *p = &pr;
+p->name() // Prof. Strousturp.
+
+```  
+
+## Pure virtual methods / abstract methods  
+```cpp
+// Can't create class instance. But can create a pointer for instance of inherint class 
+struct Person {
+    virtual string occupation() const = 0;
+}
+
+```  
+## virtual destructor   
+Incorrect  
+```cpp
+struct Person {
+    ...         };
+
+struct Student : Person{
+    ...
+private:
+    string uni_;
+};
+
+int main(){
+    Person *p = new Student("Alex", 24, "Foxford");
+    ...
+    delete p; // ~Person. Memory leaks, uni_ unreleased 
+}
+
+```   
+Correct  
+```cpp
+struct Person {
+    ...
+    virtual ~Person(){};
+};
+
+struct Student : Person{
+    ...
+private:
+    string uni_;
+};
+
+int main(){
+    Person *p = new Student("Alex", 24, "Foxford");
+    ...
+    delete p; // ~Student 
+}
+
 ```
