@@ -192,8 +192,10 @@ FormattedFile f;
 f.write(4;)
 f.write("Hello");
 ```  
-## polymorfizm  
-## Overriding. Virtual methods
+# Polymorfizm  
+## Overriding. Virtual methods  
+If one method is virtual, you must to define virtual destructor  
+In constructors virtual methos behave like nonvirtual methosd  
 
 ```cpp
 
@@ -241,14 +243,20 @@ int main(void)
 
 ```  
 
-## Pure virtual methods / abstract methods  
+## Pure(Clear) virtual methods / abstract methods  
 ```cpp
 // Can't create class instance. But can create a pointer for instance of inherint class 
 struct Person {
     virtual string occupation() const = 0;
 }
 
-```  
+```
+
+## Virtual methods table  
+When we have pilimorfic behaviour, compiler create a virtual methods table.  
+`p->occupation();` -> `p->vptr[1]()` - virtual method call  
+Htis mechanism allow us to reach dynamin polimorfitzm  
+
 ## virtual destructor   
 Incorrect  
 ```cpp
