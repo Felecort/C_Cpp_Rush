@@ -145,73 +145,30 @@ void foo()
     IntArray a1(10);
     IntArray a2(20);
 } // Delete struct. a2, then a1
-```  
+```
 
-Methods can be also constant  
+# OOP  
+## Inheritance  
+`struct Derived <public/private/protected> : Base`: public by defauld  
+`class Derived <public/private/protected> : Base`: private by defauld  
+Child class haven't access for private fields in parent class.  
+Keyword `protected` get access for private fields and methods for his children. But better not to use this modifyer for fields, only for methods    
 ```cpp
-struct Obj
-{
-    int i;
-    char get_c() const {
-        return 'h';
-        }
-};
-```  
 
-`mutable` allows change data in constant methods  
-```cpp
-struct Obj
-{
-    size_t size() const{
-        ++counter_;
-        return size_;
-    }
+struct Person {
+    Person(string name, int age) : name_(name), age_(age)
+    {}
 private:
-    size_t size;
-    int *data;
-    mutable size_t counter_;
+    string name_;
+    int age_;
 };
-```
 
-Copy classes / structures  
-Copy constructor calls when we initialize new variable with some other var
-`Point p2 = p1;`
-```cpp
-struct Point{
-    Point() { // Constructor
-        x = y = 0;
-    }
-    Point (double x, double y){// Constructor
-        this->x = x;
-        this->y = y;
-    }
-    Point(Point const &p){ // Copy constructor
-        ...
-    }
-
-    double x;
-    double y;
+struct Student : Person {
+    Student(string name, int age, string uni)
+        : Person(name, age), uni_(uni)
+    {}
+private:
+    string uni_;
 };
+
 ```
-
-
-Operator overload  
-```cpp
-struct Point{
-    Point() { // Constructor
-        x = y = 0;
-    }
-
-    Point &operator=(Point &p){ // Overload = operator
-        if (this != &p){ // Except p = p case
-            ...
-        }
-        return *this;
-    }
-
-    double x;
-    double y;
-};
-```
-
-If we don't want that somebody comy data, place copy operator and `=` operator in private without realization  
