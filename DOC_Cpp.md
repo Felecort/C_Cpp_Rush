@@ -146,3 +146,29 @@ void foo()
     IntArray a2(20);
 } // Delete struct. a2, then a1
 ```
+
+# OOP  
+## Inheritance  
+`struct Derived <public/private/protected> : Base`: public by defauld  
+`class Derived <public/private/protected> : Base`: private by defauld  
+Child class haven't access for private fields in parent class.  
+Keyword `protected` get access for private fields and methods for his children. But better not to use this modifyer for fields, only for methods    
+```cpp
+
+struct Person {
+    Person(string name, int age) : name_(name), age_(age)
+    {}
+private:
+    string name_;
+    int age_;
+};
+
+struct Student : Person {
+    Student(string name, int age, string uni)
+        : Person(name, age), uni_(uni)
+    {}
+private:
+    string uni_;
+};
+
+```
