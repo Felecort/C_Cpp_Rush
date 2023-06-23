@@ -8,9 +8,18 @@
 `int *m = new [N]`  
 `delete [] m`  
 
+Operator `new` call constructor. `malloc` doesn't do it
+
+# Constants  
+
+Const referense for expresion on the left
+
 Существует мнемоническое правило, позволяющее легко запомнить, к чему относится const. Надо провести черту через "*", если const слева, то оно относится к значению данных; если справа — к значению указателя.
 
-
+`const int *` is equal `int const * `  - pointers for const  
+But `int * const` - constant pointer  
+`const int * const` - constant pointer on const  
+`const int const * const` - same as above
 
 # Multidimentions type cast  
 ![alt text for screen readers](/.images/array_types_cast.png "Functions")  
@@ -21,7 +30,10 @@ Don't use C-strings, it's hard and tedious
 Structs exist only in cimpile time, not after
 Use `<string>` lib  
 
-# Structures  
+# Classes and Structures  
+Classes = Structures, but in classes all fields are private
+Struct with methods is a class. No ability to use standart struct initialization  
+`StructWithMethoisd st1 = {...}` - error   
 Can contains functions/classes...  
 To use struct fields, use keyword `this`  
 ```Cpp  
@@ -133,8 +145,4 @@ void foo()
     IntArray a1(10);
     IntArray a2(20);
 } // Delete struct. a2, then a1
-```  
-
-
-# OOP  
-## Inheritance
+```
