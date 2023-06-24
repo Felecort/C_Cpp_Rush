@@ -78,6 +78,10 @@ struct Rational {
         return this->denominator_;
     }
 
+    operator double() const {
+        return to_double();
+    }
+
 private:
     int numerator_;
     int denominator_;
