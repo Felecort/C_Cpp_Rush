@@ -31,6 +31,28 @@ Don't use C-strings, it's hard and tedious
 Structs exist only in cimpile time, not after
 Use `<string>` lib  
 
+# Global variables  
+Not in main:
+`extern` - keyword. Equal zero bu defauld  
+`extern int global;` - declaration - in header  
+`int global = 10;` - declaration and defenition - in .cpp
+
+# Static variable  
+Not in main  
+`static` - global variable or func, but only inside module / translation unit  
+Problems with multithreads  
+Static class fields like static variables, but they containce not in class instance, but in class. Static field in class like ordinary function and has access for private fields    
+In some func. Func remember value in all calls. Save state  
+```cpp
+int next(int start = 0){
+    static int k = start;
+    return k++;
+}
+```  
+
+# Inline  
+We aks compiler to put in function inside code. Should me in .h  
+
 # Scope enums  
 Scoped enums more safety, they required `::` operator  
 ```cpp
@@ -353,3 +375,47 @@ struct Router : NetworkDevice {
 "если a имеет b " -  пишем агрегацию
 
 "если a является b" - наследование
+
+
+# Friend  
+Do not use this keyword  
+
+# Singleton  
+Menas, that some class can have only one instance. Operation system, access for database - are examples  
+
+```cpp
+struct Singleton {
+    static Singleton & instance() {
+        static Singleton s;
+        return s;
+    }
+    Data &data() {return data_;}
+
+private:
+    Singleton() {}
+
+    Singleton(Singleton const&);
+    Singleton operator=(Singleton const &);
+    Data data_;
+}
+
+int main(){
+    Singleton &s = Singleton::instance();
+    Data d = s.data();
+
+    d = Singleton::instance().data() // s.data();
+    return 0;
+}
+
+```
+
+
+
+# Templates  
+```cpp
+template <class/typename Type>
+struct Array{
+    explicit Array(size_t size) : data_(new Type[size]), size_(size) {}
+    ~Array(){delete [] data_;}
+}
+```
