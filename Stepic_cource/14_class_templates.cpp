@@ -30,11 +30,8 @@ private:
 
 int main(void)
 {
-    
     Array<int> ai(10);
     Array<float> af(20);
     Array<Array<int>, size_t, Array<int> const&> da(30);
-
-    
     return 0;
 }
