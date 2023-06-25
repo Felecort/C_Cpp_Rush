@@ -456,3 +456,78 @@ int main(void)
 ```cpp
 
 ```
+
+
+# virtual inheritance  
+Without virtual inheritance:  
+```
+ArtWork     ArtWork  
+   |           |  
+Lyrics       Music  
+   |           |  
+   \           /  
+    \         /  
+     \       /  
+      \     /  
+       \   /  
+        \ /  
+         |  
+        Song  
+```
+Using virt inheritance. Diamond inheritance  
+```
+    Unit
+     /\
+    /  \   
+   /    \
+ Elf   Archer
+   \    /
+    \  /
+     \/
+  ElfArcher  
+```  
+Use `virtual` keyword, solution with many constructors problem: explicitly call constructor  
+```cpp
+struct Unit{
+    Unit(unitid id, int health);
+};
+struct Elf: virtual Unit{
+    explicit Elf(unitid id) : Unit(id, 100){}
+};
+struct Archer: virtual Unit{
+    explicit Archer(unitid id) : Unit(id, 200){}
+};
+struct ElfArcher: Elf, Archer {
+    explicit ElfArcher(unit id): unit(id, 150), Elf(id), Archer(id){}
+};
+```  
+Vitrual tables make work  (`__get<Class>Ptr__()-><field>`) - problems with perfomance  
+
+# Static cast  
+Standart cast (numerical, pointers...)  
+```cpp
+double s = static_cast<double>(2) / 3 * 100;
+s = static_cast<int>(d);
+```  
+
+# Const cast  
+Allow to put off and add const  
+Put off const is not safe  
+
+# Reinterpret cast  
+If we need to send double data like a char  
+
+```cpp
+double *m = static_cast<double *>(malloc(sizeof(double) * 100));
+char *mc = reinterptered_cast<char *>(m);
+send(mc);
+```  
+
+
+# Runtime type information (RTTI)  
+`typeid` return `std::type_info`  
+`typeid(var).name()`
+`dynamic_cast` - check validity in runtime, `dynamic_cast<void *>` - returns address of first byte  
+
+
+
