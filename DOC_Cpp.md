@@ -530,6 +530,7 @@ send(mc);
 `dynamic_cast` - check validity in runtime, `dynamic_cast<void *>` - returns address of first byte  
 
 # Namespaces  
+Do not include full namespace (`using namespace std` - evil)
 These are the ways to distinguish names scopes  
 In C the main approach is to set prefix:  
 `struct XML_Parser;`  
