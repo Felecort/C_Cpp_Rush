@@ -529,5 +529,95 @@ send(mc);
 `typeid(var).name()`
 `dynamic_cast` - check validity in runtime, `dynamic_cast<void *>` - returns address of first byte  
 
+# Namespaces  
+These are the ways to distinguish names scopes  
+In C the main approach is to set prefix:  
+`struct XML_Parser;`  
+`in XML_GetCurrentline`  
+
+In C++ we can use namespaces  
+```cpp
+namespace XML{
+    struct Parser;
+    int GetCurrentLine;
+};
+
+XML::Parser;
+XML::GetCurrentLine
+```   
+
+Namespaces can be nested
+```cpp
+namespace items {
+    namespace food {
+        struct Fruit{};
+    }
+}
+
+items::food::Fruit apple("Apple");
+```  
+
+And can be separete  
+```cpp
+namespace weapon { struct Bow {};}
+
+namespace items{
+    struct Scroll {};
+    struct Artefact {};
+}
+namespace weapon { struct Sword {};}
+
+```  
+Something in class/struct is part of namespace  
+Inside namespace we can call any object inside this namespace, but of we call outer object, we need to use "root catalog", if we have func with the same nami in namespace (name resoution mechanism in compiletime)  
+```cpp
+// But if we call object outer namespace, we need prefix  
+int var;
+namespace items{
+    int *c = ::(&var);
+}
+
+
+int foo(int i) { return 1; }
+
+namespace re{
+    int foo(float f) { return 2; } // Process finding names stops, when we found name
+    int foo(double d1, double d2) { return 3; }
+    
+    namespace spb {
+        int global = foo(5); // int foo(float f) will be call
+    }
+}
+```  
+
+Keyword `using` can includ some namespace in current  
+Really, C++ uses Kenning search (ADL - argument-dependent name lookup)    
+```cpp
+namespace cg{
+    struct Vector2 {};
+    Vector2 operator+(Vector2 a, Vector2 const &b) {}
+}
+
+cg::Vector a(1, 1);
+cg::Vector b(1, 3);
+b = a + b; // equal to b = operator+(a, b);
+// But how compiler found cg::operator+(...)
+```  
+
+## Anonimus namespaces  
+Like static structs. Structures are defined in one translation unit    
+```cpp
+namespace {
+    struct Test {};
+}
+// Equal to:
+namespace $GeneratedName$ {
+    struct test {std::strung name; };
+}
+using namespace $GeneratedName$;
+
+```
+
+
 
 
