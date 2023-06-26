@@ -636,3 +636,25 @@ typedef void(*OtherType)(double);
 using OtherType = void (*)(double);
 ```  
 
+
+# Auto and decltype keywords  
+`auto` - use type, that have rvalue  
+`decltype` - "compute" type of some expression    
+auto cut off outer feference and const  
+`auto a = items[0]` - a - Item  
+`decltype(items[0]) b = a` b - Item const &  
+
+`decltype(a) c = a` c - Item  
+`decltype((a)) d = a` d - Item &  
+
+
+```cpp
+Array<Unit *> units;
+for(size_t i = 0; i != units.size(); i++){
+    auto u = units[i];
+    // decltype(u->items()) - equal type of u->items()
+    decltype(u->items()) items = u->items();
+}
+
+```
+
