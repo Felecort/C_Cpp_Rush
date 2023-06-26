@@ -619,6 +619,20 @@ using namespace $GeneratedName$;
 
 ```
 
+Namespace can have a aliaces(synonims):  
+`namespace sword = Items::Weapons::Melee;`  
 
+## Keyword `using`  
+Much more powerfull, allows sustain `typedef`  
+```cpp
+template<class A, class B, int N>
+class SomeType;
 
+template<typenameB>
+using TypedefName = SomeType<double, B, 5>;
+
+// Lines below are equal
+typedef void(*OtherType)(double);
+using OtherType = void (*)(double);
+```  
 
