@@ -658,3 +658,72 @@ for(size_t i = 0; i != units.size(); i++){
 
 ```
 
+# delete and default keywords  
+
+`default` - Constructor by default  
+`delete` - do not generate method  
+
+```cpp
+struct Sometype {
+    Sometype() = default; // construct by default
+    Sometype(OtherType p) {}
+};
+
+struct NonCopyble {
+    NonCopyble() = defualt;
+    NonCopyble(const NonCopyble&) = delete;
+    NonCopyble & operator=(const NonCopyble) = delete;
+};
+```  
+
+# Constructors delegation  
+
+# Explicit methods overriding  
+
+fields by default, new approach to init constr  
+`override` - Explicit say to compiter, that ve override some virtual method   
+`final` - Forbide child classes overriding this method, or fobide nested from some class   
+```cpp
+struct Base{
+    virtual void update();
+    virtual void foo(int);
+    virtual void bar() const;
+};
+
+struct Derived : Base {
+    void updata() override; // Error. updatA, not updatE
+    void foo(int) override; // Ok
+    virtual void foo(long) override; // Error. Not `int`
+    virtual void foo(int) const override; // Error. Not const
+    virtual int foo(int) override; // Error. return type is not int
+    virtual void bar(long); // new virtual method. Ok.
+    virtual void bar(long) const final; // Ok. Forbide child classes overriding this method
+}
+```  
+
+# Rvalue preferance. Moving constructor  
+We "take away" boofer and data  
+```cpp
+struct String{
+    String(String && s) // && - rvalue preference
+    : data_(s.data_),   // take away
+    size_(s.size_)      // take away
+    {
+        s.data_ = nullptr; // Consent object
+        s.size_ = 0;       // Consent object
+    }
+    String operator=(String && s){
+        delete [] data_;
+        // take away data
+        data_ = s.data_;
+        size_ = s.size_;
+
+        // Consent data
+        s.data = nullptr;
+        s.size_ = 0;
+        return *this;
+    }
+}
+
+```
+
