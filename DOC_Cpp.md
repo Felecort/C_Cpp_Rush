@@ -74,9 +74,60 @@ int main(void)
 `for(element_type element_name : array)`  
 ```cpp
 int arr[] = {10, 20, 30};
-for (int i : arr){}
+int sum = 0;
 
+for (int x : arr){ sum += x; } // sum elements
+
+for (int &x : arr){ x *= 2; } // double every element
+```  
+
+# Initialization list  
+```cpp
+template<typename T>
+struct Array{
+    Array(std::initializer_list<T> list);
+};
+Array<int> primes = {2, 3, 4, 5}; // Like standart init
+
+int sum(std::initializer_list<int> list){
+    int res = 0;
+    for(int x : list) res += x;
+    return res;
+}
+int s = sum({1, 2, 3, 4}) // -> 10
 ```
+
+# Lambda expression and std::function  
+std::function is a wrapper. Creates a pointer for func   
+`int foo(bool, float); std::function<int, (bool, float)> *pointer*`  
+(op created using `std::function`)
+`op = [](*parametrs*) {return *body*};` - default  
+`op = [](*parametrs*) -> *return type* {*body*}` - with return type  
+`op = [](auto *param*) {*body*}` - with template (`auto`)   
+Capturing LOCAL VAR by reference/value. Allowed to capture `this`  
+`[&]` and `[=]` - all local vars, `[=, &z]` - except `z`  
+```cpp
+int total = 0;
+auto addToTotal = [&total](int x) {total += x;};
+```
+# Raw strings  
+`R"(some text, d\user\vadim...)"` - raw str, brackets ignors    
+`R"delimiter |start. some text. End|" )delimiter"`
+
+# Enum class  
+It's save version of enums. Use enum name and var to get access for data  
+```cpp
+enum class COLORS { // int by default
+    BLACK, WHITE, RED = 4, GREEN = 8
+};
+cout << COLORS::RED;
+// explicit data type 
+enum class CONSTANTS : double { // int by default
+    e = 2.718281828459045, pi = 3.14
+};
+```
+
+
 # Classes and Structures  
 Classes = Structures, but in classes all fields are private
 Struct with methods is a class. No ability to use standart struct initialization  
@@ -724,6 +775,15 @@ struct String{
         return *this;
     }
 }
-
 ```
+`std::move(x)` allosw move var insted coping  
+But be careful, because compiler can make optimizations and `std::move` may threat him  
+
+
+# constexpr  
+calculation value in compile time  
+`constexpr double accOfG = 9.8;`  
+constexpr func may call only constexpr funcs and have one return `statement`
+`constexpr int pow(...){...}`  
+
 
