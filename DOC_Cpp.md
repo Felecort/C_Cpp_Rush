@@ -503,10 +503,6 @@ int main(void)
     return 0;
 }
 ```
-## Function templates  
-```cpp
-
-```
 
 
 # virtual inheritance  
@@ -785,5 +781,72 @@ calculation value in compile time
 `constexpr double accOfG = 9.8;`  
 constexpr func may call only constexpr funcs and have one return `statement`
 `constexpr int pow(...){...}`  
+
+# STL. Standart template library   
+Part of std lib  
+Containers, iterators, adapters, algorithms, functors
+
+## Containers: consecutive and associative  
+### consecutive contsiners  
+
+`*Container*::value_type/iterator/const_iterator`  
+Common methors: `size, max_size, empty, clear`  
+`begin, end, cbegin, cend`  
+compare operators `==, !=, <...`  
+
+Constructors have:  
+* constructor: by first and last elements  
+* constructor: const_count, def_value  
+* std::initializer_list    
+* `back`, `front`  
+* `push_back`, `emplace_back`  
+* `assign`, `insert`, `emplace`, `erase`  
+
+
+### Vector template  
+Efficiency add/del in the end  
+* `operator[]` - fast, not safety, method `at` - slow, but safe  
+* `resize`  
+* `capacity` - buffer size, `reserve` - enlarge buffer, `shrink_to_fir` - set capacity equal to size  
+* `pop_back` - delete from the end, `data`  
+
+### deque - double ended queue  
+Efficiency add/del element at the end and beginning  
+`push_front`
+
+
+### List - double linked list  
+pop and add for O(n)  
+No `oparator[]`. If need to iterate, use range-based for  
+for more complicated actions:  
+`*container type*::iterator i = list.begin;`  
+`for(; i != l.end(); ++i) if(*i == "Two") break;`  
+`l.erase(i)l` - delete element "two"  
+
+### Forward list - linked list  
+
+
+### String  
+String is an instance of `basic_string<char>`  
+
+### Adapters  
+Wrappers on the containers  
+`valarray` - array for numerical data  
+
+## Associative containers  
+Have methods: `find`, `count`, `erase`  
+
+### Set - balanced binary tree  
+add, del, find - O(log(n))  
+
+### Multiset - balanced binary tree  
+Like Set, bat can contain repetitives
+
+### Map - dictionary - balanced binary tree
+`std::pair<const Key, T>`  
+
+
+### Multipam  
+Like multiset - can containn repetitives keys  
 
 
