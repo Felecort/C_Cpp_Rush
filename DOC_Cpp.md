@@ -22,6 +22,20 @@ But `int * const` - constant pointer
 `const int * const` - constant pointer on const  
 `const int const * const` - same as above
 
+## Const methods  
+In `const` methods we can read-only the class object  
+```cpp
+struct SomeStruct {
+    SomeStruct(int year) : year_(year) {}
+    void foo(int a) const {
+        a++;
+        cout << year_ << " " << a;
+    }
+private:
+    int year_;
+};
+```  
+
 # Multidimentions type cast  
 ![alt text for screen readers](/.images/array_types_cast.png "Functions")  
 
@@ -42,6 +56,7 @@ Not in main
 `static` - global variable or func, but only inside module / translation unit  
 Problems with multithreads  
 Static class fields like static variables, but they containce not in class instance, but in class. Static field in class like ordinary function and has access for private fields    
+Static methods are methods, that don't members of particular class instance  
 In some func. Func remember value in all calls. Save state  
 ```cpp
 int next(int start = 0){
@@ -684,10 +699,13 @@ using OtherType = void (*)(double);
 ```  
 
 
-# Auto and decltype keywords  
+# Auto and decltype keywords    
 `auto` - use type, that have rvalue  
+You also can add `*`, `&` and `const` before/after `auto` to cteare references, pointers and constants  
+
 `decltype` - "compute" type of some expression    
 auto cut off outer feference and const  
+
 `auto a = items[0]` - a - Item  
 `decltype(items[0]) b = a` b - Item const &  
 
@@ -849,4 +867,9 @@ Like Set, bat can contain repetitives
 ### Multipam  
 Like multiset - can containn repetitives keys  
 
+
+# Exceptions  
+Throw Exceptions:
+Keyword `throw` uses before throwable object. Most of objects are throwable. But good practice is to use `std::runtime_error` in `<stdexcept>`  
+`throw std::runtime_error{"Error occured"}`  
 
