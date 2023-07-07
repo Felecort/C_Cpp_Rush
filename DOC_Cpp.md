@@ -766,23 +766,39 @@ struct Derived : Base {
 }
 ```  
 
+# rvalue & lvalue  
+Every object has two characteristics: *type* and *value category*  
+generalized, pure, expiring
+* lvalue: glvalue, that isn't an xvalue    
+* rvalue: a prvalue or an xvalue  
+
+```cpp
+void ref_type(int &x){ // Takes a lvalue
+    cout << "lvalue " << endl;
+}
+
+void ref_type(int &&x){ // Takes a rvalue
+    cout << "rvalue " << endl;
+}
+```
+
 # Rvalue preferance. Moving constructor  
 We "take away" boofer and data  
+`std::move` changes the lvalue into an rvalue. More correct name should be `std::rvalue`. `std::move` doesn't move anything, it's cast   
+`move` constructor designed not to throw exceptions. Use `noexcept` 
 ```cpp
 struct String{
     String(String && s) // && - rvalue preference
     : data_(s.data_),   // take away
-    size_(s.size_)      // take away
-    {
+    size_(s.size_) noexcept {
         s.data_ = nullptr; // Consent object
         s.size_ = 0;       // Consent object
     }
-    String operator=(String && s){
+    String& operator=(String && s){
         delete [] data_;
         // take away data
         data_ = s.data_;
         size_ = s.size_;
-
         // Consent data
         s.data = nullptr;
         s.size_ = 0;
@@ -871,5 +887,17 @@ Like multiset - can containn repetitives keys
 # Exceptions  
 Throw Exceptions:
 Keyword `throw` uses before throwable object. Most of objects are throwable. But good practice is to use `std::runtime_error` in `<stdexcept>`  
-`throw std::runtime_error{"Error occured"}`  
+`throw std::runtime_error{"Error occured"}`    
+
+
+## noexcept keyword   
+Use it to chow that function can not to throw exception  
+But you mast be careful, because compiler will not handle func and if exception occured, cpp runtime will run `std::terminate()` that abort running  
+```cpp
+bool is_odd(int x) noexcept {
+    return 1 == (x % 2)
+}
+```
+
+
 
